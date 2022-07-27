@@ -437,6 +437,8 @@ jobs:
       - image: cimg/base:stable
     steps:
       # Checkout code from git
+      - checkout
+      - install_awscli
       - run:
           name: Get old stack workflow id
           command: |
@@ -444,7 +446,7 @@ jobs:
               --query "StackSummaries[*].StackName" \
               --stack-status-filter CREATE_COMPLETE --no-paginate --output text))
             echo Stack names: "${STACKS[@]}"
-            export OldWorkflowID=${curl --insecure https://kvdb.io/5jQj8XAyZh31vVvThwW81u/old_workflow_id}
+            export OldWorkflowID=$(curl --insecure https://kvdb.io/5jQj8XAyZh31vVvThwW81u/old_workflow_id)
             echo Old Workflow ID is $OldWorkflowID
       - run:
           name: Remove old stacks and files
