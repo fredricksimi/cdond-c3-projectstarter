@@ -398,13 +398,12 @@ jobs:
             echo $FRONTEND_WEBSITE
             if curl -s $FRONTEND_WEBSITE | grep "Welcome"
             then
-              exit 0
+              exit 1
             else
               exit 1
             fi
       - destroy-environment
-      - revert-migrations
-      # Here's where you will add some code to rollback on failure  
+      - revert-migrations  
   
   cloudfront-update:
     docker:
