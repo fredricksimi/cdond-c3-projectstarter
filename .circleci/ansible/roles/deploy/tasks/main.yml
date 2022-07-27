@@ -19,7 +19,7 @@
 
     cd ../
     npm install
-    
+    sudo pm2 start npm -- start
     npm run build
 
     sudo npm install forever -g
